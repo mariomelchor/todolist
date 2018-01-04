@@ -8,8 +8,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link rel="stylesheet" href="css/styles.css">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 </head>
 <body>
   <div class="container">
@@ -40,7 +38,6 @@
         </div><!-- /.card-tabs -->
 
         <div class="card-content grey lighten-4">
-
           <div id="todo">
             <ul id="todo-list" class="collection">
             </ul>
@@ -50,52 +47,15 @@
             <ul id="completed-list" class="collection">
             </ul>
           </div><!-- /.todo-completed -->
-
         </div><!-- /.card-content -->
         
       </div><!-- /.card -->
     </div><!-- /.row -->
   </div><!-- /.container -->
 
-  <script>
-    // form
-    var form = document.getElementById('form');
-    var todoList = document.getElementById('todo-list');
-    var todoData = localStorage.getItem('todoStorage') ? JSON.parse(localStorage.getItem('todoStorage')) : [];
-
-    function loopTodo() {
-      todoList.innerHTML = "";
-
-      todoData.forEach(element => {
-        var li = document.createElement('li');
-        li.classList.add('collection-item');
-        li.appendChild(document.createTextNode(element));
-
-        // Add new todo to dom
-        todoList.appendChild(li)
-      });
-    }
-  
-    loopTodo();
-
-    // event listener when submitting form
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      // Get value from input
-      var todo = document.getElementById('todo-item');
-      todoData.push(todo.value);
-
-      // Save data to the current local store
-      localStorage.setItem('todoStorage', JSON.stringify(todoData));
-
-      // Append li
-      loopTodo();
-
-      // Clear input field
-      todo.value = '';
-    })
-  </script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script src="js/scripts.js"></script>
 
 </body>
 </html>

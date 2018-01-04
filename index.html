@@ -7,52 +7,47 @@
   <title>Todolist</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="css/styles.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 </head>
 <body>
   <div class="container">
     <div class="row">
-      <div class="card">
 
+      <div class="card card-add-todo">
         <div class="card-content">
-          <form>
+          <form id="form" action="#" method="post">
             <div class="row">
-              <div class="input-field col s10">
-                <input id="icon_prefix" type="text" class="validate">
-                <label for="icon_prefix">Add Todo</label>
+              <div class="input-field col s9">
+                <input id="todo-item" name="todo-item" type="text" class="validate">
+                <label for="todoitem">Add Todo</label>
               </div>
-              <div class="input-field col s22 file-field ">
+              <div class="input-field col s3 file-field ">
                 <button class="btn waves-effect waves-light" type="submit" name="action">Add Todo  <i class="material-icons right">send</i> </button>
               </div>
             </div><!-- /.row -->
           </form>
         </div><!-- /.card-content -->
+      </div><!-- /.card -->
 
+      <div class="card">
         <div class="card-tabs">
           <ul class="tabs tabs-fixed-width">
-            <li class="tab"><a href="#todo-list">Todo</a></li>
-            <li class="tab"><a class="active" href="#todo-completed">Completed</a></li>
+            <li class="tab"><a class="active" href="#todo">Todo</a></li>
+            <li class="tab"><a href="#completed">Completed</a></li>
           </ul>
         </div><!-- /.card-tabs -->
 
         <div class="card-content grey lighten-4">
 
-          <div id="todo-list">
-            <ul class="collection">
-              <li class="collection-item">Alvin</li>
-              <li class="collection-item">Alvin</li>
-              <li class="collection-item">Alvin</li>
-              <li class="collection-item">Alvin</li>
+          <div id="todo">
+            <ul id="todo-list" class="collection">
             </ul>
           </div><!-- /.todo-list -->
 
-          <div id="todo-completed">
-            <ul class="collection">
-              <li class="collection-item">Alvin</li>
-              <li class="collection-item">Alvin</li>
-              <li class="collection-item">Alvin</li>
-              <li class="collection-item">Alvin</li>
+          <div id="completed">
+            <ul id="completed-list" class="collection">
             </ul>
           </div><!-- /.todo-completed -->
 
@@ -61,5 +56,46 @@
       </div><!-- /.card -->
     </div><!-- /.row -->
   </div><!-- /.container -->
+
+  <script>
+    // form
+    var form = document.getElementById('form');
+    var todoList = document.getElementById('todo-list');
+    var todoData = localStorage.getItem('todoStorage') ? JSON.parse(localStorage.getItem('todoStorage')) : [];
+
+    function loopTodo() {
+      todoList.innerHTML = "";
+
+      todoData.forEach(element => {
+        var li = document.createElement('li');
+        li.classList.add('collection-item');
+        li.appendChild(document.createTextNode(element));
+
+        // Add new todo to dom
+        todoList.appendChild(li)
+      });
+    }
+  
+    loopTodo();
+
+    // event listener when submitting form
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Get value from input
+      var todo = document.getElementById('todo-item');
+      todoData.push(todo.value);
+
+      // Save data to the current local store
+      localStorage.setItem('todoStorage', JSON.stringify(todoData));
+
+      // Append li
+      loopTodo();
+
+      // Clear input field
+      todo.value = '';
+    })
+  </script>
+
 </body>
 </html>

@@ -1,0 +1,24 @@
+body {
+  padding-top: 100px;
+  background: #f2f2f2;
+}
+@media only screen and ( min-width: 1200px ) {
+  .container {
+    width: 40%;
+  }
+}
+
+.card-add-todo .row {
+  margin-bottom: 0;
+}
+.tabs .tab a {
+  color: #000;
+}
+.tabs .tab a:hover, 
+.tabs .tab a.active {
+  background-color: transparent;
+  color: #26a69a;
+}
+.tabs .indicator {
+  background-color: #26a69a;
+}

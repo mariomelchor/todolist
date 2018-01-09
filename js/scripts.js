@@ -11,7 +11,6 @@ var loopTodo = function () {
 
 var createItem = function (element, index, array) {
   var li = document.createElement('li')
-  var anchor = document.createElement('a')
   var trashIcon = document.createElement('i')
   var checkbox = document.createElement('input')
   var label = document.createElement('label')
@@ -24,21 +23,18 @@ var createItem = function (element, index, array) {
   checkbox.setAttribute('name', 'checkbox')
 
   trashIcon.classList.add('material-icons')
+  trashIcon.classList.add('btn-delete-todo')
+  trashIcon.classList.add('right')
+  trashIcon.setAttribute('data-id', index)
   trashIcon.textContent = 'delete'
-
-  anchor.appendChild(trashIcon)
-  anchor.classList.add('right')
-  anchor.setAttribute('href', '#')
-  anchor.setAttribute('data-id', index)
 
   li.classList.add('collection-item')
   li.setAttribute('data-id', index)
   li.appendChild(checkbox)
   li.appendChild(label)
-  li.appendChild(anchor)
+  li.appendChild(trashIcon)
 
   // Add new todo to dom
-
   todoList.appendChild(li)
 }
 
@@ -61,3 +57,23 @@ form.addEventListener('submit', function (e) {
   // Clear input field
   todo.value = ''
 })
+
+
+// Click event for dynamic trash elements
+document.addEventListener('click', function (event) {
+  if ( event.target.classList.contains( 'btn-delete-todo' ) ) {
+    id = event.target.getAttribute('data-id')
+    deleteTodo(id)
+  }  
+}, false)
+
+var deleteTodo = function(id) {
+
+  todoData.splice(id, 1);
+  
+  // Save data to the current local store
+  localStorage.setItem('todoStorage', JSON.stringify(todoData))
+
+  loopTodo()
+
+}

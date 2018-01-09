@@ -19,3 +19,7 @@ body {
 .tabs .indicator {
   background-color: #26a69a;
 }
+.btn-delete-todo {
+  cursor: pointer;
+  color: #d70c0b;
+}

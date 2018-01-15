@@ -5,6 +5,10 @@ body {
 .container {
   max-width: 570px;
 }
+.logo img {
+  display: block;
+  margin: 0 auto;
+}
 .card-add-todo .row {
   margin-bottom: 0;
 }

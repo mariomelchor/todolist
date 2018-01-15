@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>To-Do List</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <div class="container">
@@ -17,11 +17,11 @@
         <div class="card-content">
           <form id="form" action="#" method="post">
             <div class="row">
-              <div class="input-field col s9">
-                <input id="todo-item" name="todo-item" type="text" class="validate">
+              <div class="input-field col s12 m9">
+                <input id="todo-item" name="todo-item" type="text" class="validate" required>
                 <label for="todoitem">Add a To-Do</label>
               </div>
-              <div class="input-field col s3 file-field ">
+              <div class="input-field col s12 m3 file-field ">
                 <button class="btn waves-effect waves-light" type="submit" name="action">Add Todo  <i class="material-icons right">send</i> </button>
               </div>
             </div><!-- /.row -->

@@ -1,7 +1,15 @@
 body {
-  padding-top: 100px;
+  padding-top: 25px;
   background: #f2f2f2;
 }
+
+@media ( min-width: 1200px ) {
+  body {
+    padding-top: 75px;
+  }
+}
+
+
 .container {
   max-width: 570px;
 }

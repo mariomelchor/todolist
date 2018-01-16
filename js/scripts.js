@@ -163,5 +163,6 @@ var unCompleteTodo = function(id){
   localStorage.setItem('todoStorage', JSON.stringify(todoData))
   
   loopTodo()
-  loopCompleted();
+  loopCompleted()
+  
 }

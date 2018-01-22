@@ -1,9 +1,9 @@
 // form
-var form = document.getElementById('form')
-var todoList = document.getElementById('todo-list')
-var completedList = document.getElementById('completed-list')
-var obj = { todo: [], completed: [] }
-var todoData = localStorage.getItem('todoStorage') ? JSON.parse(localStorage.getItem('todoStorage')) : obj
+var form           = document.getElementById('form')
+var todoList       = document.getElementById('todo-list')
+var completedList  = document.getElementById('completed-list')
+var obj            = { todo: [], completed: [] }
+var todoData       = localStorage.getItem('todoStorage') ? JSON.parse(localStorage.getItem('todoStorage')) : obj
 
 // functions
 var loopTodo = function () {
@@ -17,18 +17,18 @@ var createItem = function (element, index, array) {
   var checkbox = document.createElement('input')
   var label = document.createElement('label')
 
-  label.setAttribute('for', 'checkbox-' + index)
+  label.setAttribute('for', 'todo-' + index)
   label.innerText = element
 
   checkbox.setAttribute('type', 'checkbox')
-  checkbox.setAttribute('id', 'checkbox-' + index)
+  checkbox.setAttribute('id', 'todo-' + index)
   checkbox.setAttribute('name', 'checkbox')
-  checkbox.setAttribute('data-id', index)
+  checkbox.setAttribute('data-todo-id', index)
 
   trashIcon.classList.add('material-icons')
   trashIcon.classList.add('btn-delete-todo')
   trashIcon.classList.add('right')
-  trashIcon.setAttribute('data-id', index)
+  trashIcon.setAttribute('data-todo-id', index)
   trashIcon.textContent = 'delete'
 
   li.classList.add('collection-item')
@@ -54,19 +54,19 @@ var createCompleted = function (element, index, array) {
   var checkbox = document.createElement('input')
   var label = document.createElement('label')
 
-  label.setAttribute('for', 'checkbox-' + index)
+  label.setAttribute('for', 'completed-' + index)
   label.innerText = element
 
   checkbox.setAttribute('type', 'checkbox')
-  checkbox.setAttribute('id', 'checkbox-' + index)
+  checkbox.setAttribute('id', 'completed-' + index)
   checkbox.setAttribute('name', 'checkbox')
-  checkbox.setAttribute('data-id', index)
+  checkbox.setAttribute('data-completed-id', index)
   checkbox.setAttribute('checked', 'checked')
 
   trashIcon.classList.add('material-icons')
   trashIcon.classList.add('btn-delete-todo')
   trashIcon.classList.add('right')
-  trashIcon.setAttribute('data-id', index)
+  trashIcon.setAttribute('data-completed-id', index)
   trashIcon.textContent = 'delete'
 
   li.classList.add('collection-item')
@@ -120,16 +120,16 @@ var deleteTodo = function(id) {
   loopTodo()
 }
 
-// Click event for dynamic trash elements
+// Click event for dynamic checkboxes
 document.addEventListener('click', function (event) {
   if ( event.target.type === 'checkbox' ) {
     var element = event.target
-    var id = event.target.getAttribute('data-id')
-    console.log(element.checked)
-
+    
     if(element.checked){
+      var id = event.target.getAttribute('data-todo-id');
       completeTodo(id)
     } else {
+      var id = event.target.getAttribute('data-completed-id');
       unCompleteTodo(id)
     }
 

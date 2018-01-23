@@ -8,10 +8,10 @@ var todoData       = localStorage.getItem('todoStorage') ? JSON.parse(localStora
 // functions
 var loopTodo = function () {
   todoList.innerHTML = ''
-  todoData.todo.forEach(createItem)
+  todoData.todo.forEach(createTodo)
 }
 
-var createItem = function (element, index, array) {
+var createTodo = function (element, index, array) {
   var li = document.createElement('li')
   var trashIcon = document.createElement('i')
   var checkbox = document.createElement('input')
@@ -23,12 +23,13 @@ var createItem = function (element, index, array) {
   checkbox.setAttribute('type', 'checkbox')
   checkbox.setAttribute('id', 'todo-' + index)
   checkbox.setAttribute('name', 'checkbox')
-  checkbox.setAttribute('data-todo-id', index)
+  checkbox.setAttribute('data-id', index)
 
   trashIcon.classList.add('material-icons')
   trashIcon.classList.add('btn-delete-todo')
   trashIcon.classList.add('right')
-  trashIcon.setAttribute('data-todo-id', index)
+  trashIcon.setAttribute('data-id', index)
+  trashIcon.setAttribute('data-array', 'todo')
   trashIcon.textContent = 'delete'
 
   li.classList.add('collection-item')
@@ -60,13 +61,14 @@ var createCompleted = function (element, index, array) {
   checkbox.setAttribute('type', 'checkbox')
   checkbox.setAttribute('id', 'completed-' + index)
   checkbox.setAttribute('name', 'checkbox')
-  checkbox.setAttribute('data-completed-id', index)
+  checkbox.setAttribute('data-id', index)
   checkbox.setAttribute('checked', 'checked')
 
   trashIcon.classList.add('material-icons')
   trashIcon.classList.add('btn-delete-todo')
   trashIcon.classList.add('right')
-  trashIcon.setAttribute('data-completed-id', index)
+  trashIcon.setAttribute('data-id', index)
+  trashIcon.setAttribute('data-array', 'completed')
   trashIcon.textContent = 'delete'
 
   li.classList.add('collection-item')
@@ -106,30 +108,37 @@ form.addEventListener('submit', function (e) {
 document.addEventListener('click', function (event) {
   if ( event.target.classList.contains( 'btn-delete-todo' ) ) {
     id = event.target.getAttribute('data-id')
-    deleteTodo(id)
+    array = event.target.getAttribute('data-array')
+    deleteTodo(array,id)
   }  
 }, false)
 
-var deleteTodo = function(id) {
-  // Remove from array
-  todoData.todo.splice(id, 1);
+var deleteTodo = function(array, id) {
+
+  if( array === 'todo') {
+    // Remove from array
+    todoData.todo.splice(id, 1);
+  } else {
+    // Remove from array
+    todoData.completed.splice(id, 1);
+  }
   
   // Save data to the current local store
   localStorage.setItem('todoStorage', JSON.stringify(todoData))
 
-  loopTodo()
+  loopTodo();
+  loopCompleted();
 }
 
 // Click event for dynamic checkboxes
 document.addEventListener('click', function (event) {
   if ( event.target.type === 'checkbox' ) {
     var element = event.target
+    var id = event.target.getAttribute('data-id');
     
     if(element.checked){
-      var id = event.target.getAttribute('data-todo-id');
       completeTodo(id)
     } else {
-      var id = event.target.getAttribute('data-completed-id');
       unCompleteTodo(id)
     }
 
@@ -164,5 +173,4 @@ var unCompleteTodo = function(id){
   
   loopTodo()
   loopCompleted()
-  
 }

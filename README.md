@@ -1,6 +1,6 @@
 # To-Do List App
 
-Vanilla JS To-Do List App that uses Local Storage
+Vanilla JavaScript To-Do List App that uses Local Storage
 
 Try the App Here [https://mariomelchor.github.io/todolist/index.html](https://mariomelchor.github.io/todolist/index.html)
 

@@ -25,9 +25,7 @@ var createTodo = function (element, index, array) {
   checkbox.setAttribute('name', 'checkbox')
   checkbox.setAttribute('data-id', index)
 
-  trashIcon.classList.add('material-icons')
-  trashIcon.classList.add('btn-delete-todo')
-  trashIcon.classList.add('right')
+  trashIcon.className = 'material-icons btn-delete-todo right'
   trashIcon.setAttribute('data-id', index)
   trashIcon.setAttribute('data-array', 'todo')
   trashIcon.textContent = 'delete'
@@ -64,9 +62,7 @@ var createCompleted = function (element, index, array) {
   checkbox.setAttribute('data-id', index)
   checkbox.setAttribute('checked', 'checked')
 
-  trashIcon.classList.add('material-icons')
-  trashIcon.classList.add('btn-delete-todo')
-  trashIcon.classList.add('right')
+  trashIcon.className = 'material-icons btn-delete-todo right'
   trashIcon.setAttribute('data-id', index)
   trashIcon.setAttribute('data-array', 'completed')
   trashIcon.textContent = 'delete'
@@ -99,7 +95,7 @@ form.addEventListener('submit', function (e) {
     loopTodo()
 
     // Clear input field
-    todo.value = ''
+    form.reset();
   }
 
 }) 
